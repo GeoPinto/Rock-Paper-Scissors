@@ -19,7 +19,7 @@
 
       function playRound(playerSelection, computerSelection) {
           let ps = capitalise(playerSelection);
-          if ((ps == 'Scissors' && computerSelection == 'Paper') || (ps == 'Paper' && computerSelection == 'Rock') || (ps == 'Rock' && computerSelection == 'Paper') ) {
+          if ((ps == 'Scissors' && computerSelection == 'Paper') || (ps == 'Paper' && computerSelection == 'Rock') || (ps == 'Rock' && computerSelection == 'Scissors') ) {
               return 'You win!' + ' ' + ps + ' ' + 'beats' + ' ' + computerSelection + '!';
            } else if (ps == computerSelection) {
                return 'It\s a tie, play again!';
