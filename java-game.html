@@ -6,6 +6,30 @@
 </head>
 <body>
   <script>
+      const choices = ['Rock','Paper', 'Scissors'];
+
+      function computerPlay() {
+          let compChoice = choices[Math.floor(Math.random() * 3)];
+          return compChoice; 
+      }
+
+      function capitalise(str) {
+          return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+      }
+
+      function playRound(playerSelection, computerSelection) {
+          let ps = capitalise(playerSelection);
+          if ((ps == 'Scissors' && computerSelection == 'Paper') || (ps == 'Paper' && computerSelection == 'Rock') || (ps == 'Rock' && computerSelection == 'Paper') ) {
+              return 'You win!' + ' ' + ps + ' ' + 'beats' + ' ' + computerSelection + '!';
+           } else if (ps == computerSelection) {
+               return 'It\s a tie, play again!';
+           } else {
+               return 'You loose.' + ' ' + computerSelection + ' ' + 'beats' + ' ' + ps + '.';
+           }
+      }
+const playerSelection = 'Rock'
+const computerSelection = computerPlay()
+console.log(playRound(playerSelection, computerSelection))
 
   </script>
 </body>
