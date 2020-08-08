@@ -26,7 +26,7 @@ function playRound(playerSelection, computerSelection) {
         }
     }
 
-    function game() {           //it's a loop of 5x playRound(), but with with player choice prompted
+    function game() {           //for activating playround() 5x, we need to feed it 5x its variables, which are here looped
         let round = 0;
         while(round < 5) {
             let playerSelection = prompt('What is your move?');
@@ -34,7 +34,8 @@ function playRound(playerSelection, computerSelection) {
             console.log(playRound(playerSelection, computerSelection));
             round++;
         }
-        whoWins(pWin, cWin); //after the 5x (see how it's after the loop), results are presented
+        whoWins(pWin, cWin); //after the 5x (see how it's after the loop), results are computed based on 5th round values
+                            //of pWin and cW
     }
 
     function whoWins(n1, n2) {
