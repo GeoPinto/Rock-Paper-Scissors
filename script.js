@@ -45,11 +45,11 @@ function playRound(playerSelection) {
         const finalResult = document.getElementById('m');
         if (round > 5) {
         if(n1 > n2) {
-           finalResult.textContent = `VENCESTE!  - Panasca ${n1}  Computador - ${n2}  Empates - ${5- n1 - n2}`;
+           finalResult.textContent = `VENCESTE! Panasca:${n1}  Computador:${n2}  Empates:${5- n1 - n2}`;
         } else if (n1 < n2) {
-            finalResult.textContent = `COM OS PORCOS!  - Panasca ${n1} - Computador - ${n2}  Empates - ${5- n1 - n2}`;
+            finalResult.textContent = `COM OS PORCOS! Panasca:${n1}  Computador:${n2}  Empates:${5- n1 - n2}`;
         } else {
-            finalResult.textContent = `EMPATADOS! - Panasca ${n1} - Computador - ${n2}  Empates - ${5- n1 - n2}`;
+            finalResult.textContent = `EMPATADOS! PPanasca:${n1}  Computador:${n2}  Empates:${5- n1 - n2}`;
         }
         restart();
     }
