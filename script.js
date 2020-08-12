@@ -1,52 +1,65 @@
-const choice = ['Rock', 'Paper','Scissors']; //These are the choices to be played, defined as an array
+const choice = ['Pedra', 'Papel','Tesoura']; 
 let pWin = 0;
-let cWin = 0; // win count, starting at 0
+let cWin = 0;
+let round = 0; 
 
-function computerPlay(){
-    return choice[Math.floor(Math.random() * 3)];                                   //Math.random randomly picks an index in [0,1[, but we have [0,2]                                      //so Math.random() * 3. But this are floating, and can be in [2,3] 
-}                                                   //Hence, Math.floor() returns the maximum integer lower or equal
-                                                    // to the  value, thus in the [0,2]
+const Pedra = document.getElementById('Pedra');
+const Papel = document.getElementById('Papel');
+const Tesoura = document.getElementById('Tesoura');
+const buttons = document.getElementById('buttons');
+const result = document.getElementById('result');
 
-function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase(); //make a string case insensitive
+
+
+function playerSelection() {
+    Pedra.addEventListener('click', () => {
+        playRound('Pedra')
+    });
+    Papel.addEventListener('click', () => {
+        playRound('Papel')
+    });
+    Tesoura.addEventListener('click', () => {
+        playRound('Tesoura')
+    });
 }
+playerSelection();
 
                                        
-function playRound(playerSelection, computerSelection) {
-    let ps = capitalize(playerSelection);           //for a cleaner code, the paramters have been abbreviated
-    let cs = computerSelection;
-    if ((ps == 'Rock' && cs == 'Scissors') || (ps == 'Paper' && cs == 'Rock') || (ps == 'Scissors' && cs == 'Paper')) {
+function playRound(playerSelection) {         
+    const computerSelection = choice[Math.floor(Math.random() * 3)];
+    if ((playerSelection == 'Pedra' && computerSelection == 'Tesoura') || (playerSelection == 'Papel' && computerSelection == 'Pedra') || (playerSelection == 'Tesoura' && computerSelection == 'Papel')) {
         pWin++;
-        return `You win! ${ps} beats ${cs}`;    //use `` to directly write strings under return
-    } else if (ps == cs) {
-        return `It's a tie!`; 
+        result.textContent = `Venceste! ${playerSelection} ganha a ${computerSelection}`;    
+    } else if (playerSelection == computerSelection) {
+        result.textContent = `Empate!`; 
         } else {
-            cWin++;  //adds 1 value to the variable, or one victory
-        return `You loose! ${cs} beats ${ps}`;
-        }
+            cWin++; 
+        result.textContent = `Fudeu! ${computerSelection} ganha a ${playerSelection}`;
+        } round++;
+        whoWins(pWin, cWin);
     }
 
-    function game() {           //for activating playround() 5x, we need to feed it 5x its variables, which are here looped
-        let round = 0;
-        while(round < 5) {
-            let playerSelection = prompt('What is your move?');
-            const computerSelection = computerPlay();
-            console.log(playRound(playerSelection, computerSelection));
-            round++;
-        }
-        whoWins(pWin, cWin); //after the 5x (see how it's after the loop), results are computed based on 5th round values
-                            //of pWin and cW
-    }
+
 
     function whoWins(n1, n2) {
-        let message = document.getElementById("m"); //links a variable to an html element
+        const finalResult = document.getElementById('m');
+        if (round > 5) {
         if(n1 > n2) {
-            message.innerHTML = `You WIN! Player - ${n1}  Computer - ${n2}  Ties - ${5- n1 - n2}`;
+           finalResult.textContent = `VENCESTE!  - Panasca ${n1}  Computador - ${n2}  Empates - ${5- n1 - n2}`;
         } else if (n1 < n2) {
-            message.innerHTML = `You LOOSE! Player - ${n1}  Computer - ${n2}  Ties - ${5- n1 - n2}`;
+            finalResult.textContent = `COM OS PORCOS!  - Panasca ${n1} - Computador - ${n2}  Empates - ${5- n1 - n2}`;
         } else {
-            message.innerHTML = `It's a tie! Player - ${n1}  Computer - ${n2}  Ties - ${5- n1 - n2}`;
+            finalResult.textContent = `EMPATADOS! - Panasca ${n1} - Computador - ${n2}  Empates - ${5- n1 - n2}`;
         }
-    } //the results are shown directly in the position of the html element with id = "m"
-    
-
+        restart();
+    }
+    } 
+    function restart() {
+        const button = document.createElement('button')
+        button.setAttribute('style', 'display: block; margin: auto; text-align: center; font-family: monospace; font-size: x-large');
+        button.textContent = "Esbardalha-te de novo";
+        document.body.appendChild(button);
+        button.addEventListener('click', () => {
+            location.reload();
+        })
+        }
