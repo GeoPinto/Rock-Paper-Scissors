@@ -11,9 +11,9 @@ const buttons = document.querySelectorAll('button');
 
 function playerSelection() {
 	buttons.forEach((button) => {       //iterates event listener for each button
-		button.addEventListener('click', () => {
-			playRound(button.id);
-		})
+	button.addEventListener('click', () => {
+	playRound(button.id);
+	})
 	})
 }
 playerSelection();
@@ -23,12 +23,12 @@ function playRound(playerSelection) {
     if (round < 5) {     	
     if ((playerSelection == 'Rock' && computerSelection == 'Scissors') || (playerSelection == 'Paper' && computerSelection == 'Rock') || (playerSelection == 'Scissors' && computerSelection == 'Paper')) {
         pWin++;
-        result.textContent = `YOU WIN! ${playerSelection} beats ${computerSelection}`;    
+        result.textContent = `YOU WIN! ${playerSelection} beats ${computerSelection}.`;    
     } else if (playerSelection == computerSelection) {
         result.textContent = `That\s a tie!`; 
         } else {
             cWin++; 
-        result.textContent = `YOU LOOSE! ${computerSelection} beats ${playerSelection}`;
+        result.textContent = `YOU LOOSE! ${computerSelection} beats ${playerSelection}.`;
         } round++;
         finalWin(pWin, cWin);
     } else {        //the game is stopped after 5 rounds and the usser needs to click re-start button
@@ -54,9 +54,10 @@ function finalWin(n1, n2) {
         button.addEventListener('click', () => {
         location.reload();
            }) 
-           }; restart();     
-    } else {
+           }; restart()     
+        } else {
         return ; //re-start button to appear only at round 5
-    } }
+        } 
+    }
     
     
