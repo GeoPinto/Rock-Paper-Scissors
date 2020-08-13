@@ -1,65 +1,62 @@
-const choice = ['Pedra', 'Papel','Tesoura']; 
+const choice = ['Rock', 'Paper','Scissors']; 
 let pWin = 0;
 let cWin = 0;
 let round = 0; 
 
-const Pedra = document.getElementById('Pedra');
-const Papel = document.getElementById('Papel');
-const Tesoura = document.getElementById('Tesoura');
-const buttons = document.getElementById('buttons');
+const rock = document.getElementById('Rock');
+const paper = document.getElementById('Paper');
+const scissors = document.getElementById('Scissors');
 const result = document.getElementById('result');
-
-
+const buttons = document.querySelectorAll('button');
 
 function playerSelection() {
-    Pedra.addEventListener('click', () => {
-        playRound('Pedra')
-    });
-    Papel.addEventListener('click', () => {
-        playRound('Papel')
-    });
-    Tesoura.addEventListener('click', () => {
-        playRound('Tesoura')
-    });
+	buttons.forEach((button) => {       //iterates event listener for each button
+		button.addEventListener('click', () => {
+			playRound(button.id);
+		})
+	})
 }
 playerSelection();
 
-                                       
-function playRound(playerSelection) {         
+function playRound(playerSelection) {
     const computerSelection = choice[Math.floor(Math.random() * 3)];
-    if ((playerSelection == 'Pedra' && computerSelection == 'Tesoura') || (playerSelection == 'Papel' && computerSelection == 'Pedra') || (playerSelection == 'Tesoura' && computerSelection == 'Papel')) {
+    if (round < 5) {     	
+    if ((playerSelection == 'Rock' && computerSelection == 'Scissors') || (playerSelection == 'Paper' && computerSelection == 'Rock') || (playerSelection == 'Scissors' && computerSelection == 'Paper')) {
         pWin++;
-        result.textContent = `Venceste! ${playerSelection} ganha a ${computerSelection}`;    
+        result.textContent = `YOU WIN! ${playerSelection} beats ${computerSelection}`;    
     } else if (playerSelection == computerSelection) {
-        result.textContent = `Empate!`; 
+        result.textContent = `That\s a tie!`; 
         } else {
             cWin++; 
-        result.textContent = `Fudeu! ${computerSelection} ganha a ${playerSelection}`;
+        result.textContent = `YOU LOOSE! ${computerSelection} beats ${playerSelection}`;
         } round++;
-        whoWins(pWin, cWin);
+        finalWin(pWin, cWin);
+    } else {        //the game is stopped after 5 rounds and the usser needs to click re-start button
+        return ;
     }
+}
 
-
-
-    function whoWins(n1, n2) {
+function finalWin(n1, n2) {
         const finalResult = document.getElementById('m');
-        if (round > 5) {
+        if (round == 5) {
         if(n1 > n2) {
-           finalResult.textContent = `VENCESTE! Panasca:${n1}  Computador:${n2}  Empates:${5- n1 - n2}`;
+           finalResult.textContent = `OH GLORY! You:${n1}  Computer:${n2}  Ties:${5- n1 - n2}`;
         } else if (n1 < n2) {
-            finalResult.textContent = `COM OS PORCOS! Panasca:${n1}  Computador:${n2}  Empates:${5- n1 - n2}`;
+            finalResult.textContent = `BORN TO LOOSE! You:${n1}  Computer:${n2}  Ties:${5- n1 - n2}`;
         } else {
-            finalResult.textContent = `EMPATADOS! PPanasca:${n1}  Computador:${n2}  Empates:${5- n1 - n2}`;
+            finalResult.textContent = `TIED UP! You:${n1}  Computer:${n2}  Ties:${5- n1 - n2}`;
         }
-        restart();
-    }
-    } 
-    function restart() {
+        function restart() {        
         const button = document.createElement('button')
-        button.setAttribute('style', 'display: block; margin: auto; text-align: center; font-family: monospace; font-size: x-large');
-        button.textContent = "Esbardalha-te de novo";
+        button.setAttribute('style', 'display: block; margin: auto; padding: 10px; margin-top: 40px; text-align: center; font-family: monospace; font-size: x-large');
+        button.textContent = "PROCRASTINATE AGAIN";
         document.body.appendChild(button);
         button.addEventListener('click', () => {
-            location.reload();
-        })
-        }
+        location.reload();
+           }) 
+           }; restart();     
+    } else {
+        return ; //re-start button to appear only at round 5
+    } }
+    
+    
